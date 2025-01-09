@@ -7,16 +7,16 @@ from SublimeLinter.lint.linter import LintMatch
 
 class oxlint(NodeLinter):
     defaults = {
-        "selector": "source.js"
+        "selector": "source.(js|ts)"
     }
 
-    cmd = "oxlint --format=unix $file"
+    cmd = "oxlint --jsdoc-plugin --jsx-a11y-plugin --format=unix \"$file\""
 
     regex = (
         r"(?P<filename>[\w\\\-]+\.\w+):"
         r"(?P<line>\d+):"
         r"(?P<col>\d+):"
-        r"\s*(?P<message>[\w\s\.\-\=\"\?\(\)\`\:]+\.?)"
+        r"\s*(?P<message>[\w\s\.\-\=\"\'\?\(\)\`\:\/@]+\.?)"
         r"\s*\[(?P<warning>Warning)?(?P<error>Error)?/?"
         r"(?P<code>.+)]"
     )
